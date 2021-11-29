@@ -1,60 +1,35 @@
-import React, { useRef, useState } from "react";
-import { signup, login, logout, useAuth } from "./firebase";
+import React, { useEffect, useState } from "react";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const currentUser = useAuth();
+  const [userEmail, setUserEmail] = useState(null);
 
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const handleBackLogged = (data) => {
+    setUserEmail(data);
+  };
 
-  async function handleSignup() {
-    setLoading(true);
-    try {
-      await signup(emailRef.current.value, passwordRef.current.value);
-    } catch (error) {
-      alert(error);
-    }
-    setLoading(false);
-  }
-
-  async function handlelogIn() {
-    setLoading(true);
-    try {
-      await login(emailRef.current.value, passwordRef.current.value);
-    } catch (error) {
-      alert(error);
-    }
-    setLoading(false);
-  }
-
-  async function handleLogOut() {
-    setLoading(true);
-    try {
-      logout();
-    } catch (error) {
-      alert(error);
-    }
-    setLoading(false);
-  }
+  useEffect(() => {
+    console.log(userEmail);
+  }, [userEmail]);
 
   return (
-    <div id="main">
-      <div>Currently logged in as: {currentUser?.email}</div>
-      <div id="fields">
-        <input ref={emailRef} placeholder="Email" />
-        <input ref={passwordRef} type="password" placeholder="Password" />
+    <Router>
+      <div id="main">
+        <Routes>
+          <Route
+            path="/"
+            element={<Login handleBackLogged={handleBackLogged} />}
+          ></Route>
+          <Route
+            path="/dashboard"
+            element={<Dashboard userEmail={userEmail} />}
+          ></Route>
+        </Routes>
+        {/* {userEmail && <Dashboard userEmail={userEmail}/>} */}
       </div>
-      <button disabled={loading || currentUser} onClick={handleSignup}>
-        Sign Up
-      </button>
-      <button disabled={loading || currentUser} onClick={handlelogIn}>
-        Log In
-      </button>
-      <button disabled={loading || !currentUser} onClick={handleLogOut}>
-        Log Out
-      </button>
-    </div>
+    </Router>
   );
 }
 
