@@ -1,19 +1,30 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { signup, login, logout, useAuth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { onSaveUser } from "../userReducer";
 
-function Login({ handleBackLogged }) {
+function Login() {
   const [loading, setLoading] = useState(false);
-	const navigate = useNavigate()
+  const navigate = useNavigate();
   const currentUser = useAuth();
+  const dispatch = useDispatch();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    dispatch(onSaveUser(currentUser?.email));
+  }, [currentUser]);
+
   async function handleSignup() {
     setLoading(true);
     try {
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(emailRef.current.value, passwordRef.current.value).then(
+        (data) => {
+          // dispatch(onSaveUser(data?.user?.email));
+        }
+      );
     } catch (error) {
       alert(error);
     }
@@ -25,8 +36,9 @@ function Login({ handleBackLogged }) {
     try {
       await login(emailRef.current.value, passwordRef.current.value).then(
         (data) => {
-					navigate('/dashboard')
-          // handleBackLogged(data?.user?.email);
+					console.log("login", data)
+          dispatch(onSaveUser(data?.user?.email));
+          navigate("/dashboard");
         }
       );
     } catch (error) {
@@ -38,9 +50,7 @@ function Login({ handleBackLogged }) {
   async function handleLogOut() {
     setLoading(true);
     try {
-      logout().then((data) => {
-        handleBackLogged(null);
-      });
+      logout();
     } catch (error) {
       alert(error);
     }

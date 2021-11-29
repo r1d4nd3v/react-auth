@@ -1,4 +1,8 @@
 #fields {
-	display: table-caption;
+  display: table-caption;
+  margin: 20px 0px;
+}
+
+#logout {
   margin: 20px 0px;
 }
