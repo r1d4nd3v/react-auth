@@ -6,3 +6,11 @@
 #logout {
   margin: 20px 0px;
 }
+
+#login {
+  margin-left: 5px;
+}
+
+#password {
+  margin-top: 5px;
+}
