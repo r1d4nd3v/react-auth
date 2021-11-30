@@ -1,3 +1,23 @@
+html,
+body,
+#root,
+#main > div {
+  height: 100%;
+}
+
+#buttons {
+  margin: 0px 20px;
+}
+
+#main {
+  width: 500px;
+  height: 300px;
+  margin: 20% auto;
+}
+.MuiCardContent-root {
+  display: grid;
+}
+
 #fields {
   display: table-caption;
   margin: 20px 0px;
