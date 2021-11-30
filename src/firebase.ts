@@ -35,7 +35,7 @@ export const logout = () => {
 };
 
 export const useAuth = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

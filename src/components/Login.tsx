@@ -1,30 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import { signup, login, logout, useAuth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { onSaveUser } from "../userReducer";
 
-function Login() {
+function Login({ currentUser }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const currentUser = useAuth();
+  // const currentUser = useAuth();
   const dispatch = useDispatch();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    dispatch(onSaveUser(currentUser?.email));
-  }, [currentUser]);
+    console.log("login", currentUser);
+  }, []);
 
   async function handleSignup() {
     setLoading(true);
     try {
-      await signup(emailRef.current.value, passwordRef.current.value).then(
-        (data) => {
-          // dispatch(onSaveUser(data?.user?.email));
-        }
-      );
+      await signup(emailRef.current.value, passwordRef.current.value);
     } catch (error) {
       alert(error);
     }
@@ -36,7 +32,7 @@ function Login() {
     try {
       await login(emailRef.current.value, passwordRef.current.value).then(
         (data) => {
-					console.log("login", data)
+          console.log("login", data);
           dispatch(onSaveUser(data?.user?.email));
           navigate("/dashboard");
         }
@@ -59,7 +55,6 @@ function Login() {
 
   return (
     <div id="main">
-      {/* <div>Currently logged in as: {currentUser?.email}</div> */}
       <div id="fields">
         <input ref={emailRef} placeholder="Email" />
         <input ref={passwordRef} type="password" placeholder="Password" />

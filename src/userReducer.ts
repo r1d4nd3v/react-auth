@@ -7,7 +7,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     onSaveUser: (state, action) => {
-      state.email = action.payload;
+      state.email = action?.payload?.email;
     },
 		onLogout: (state) => {
 			state.email = null

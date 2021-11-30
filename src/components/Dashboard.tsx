@@ -12,14 +12,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(userEmail);
-    if (false) {
-      navigate("/");
-    }
+    console.log("dashboard", userEmail);
   }, []);
 
   async function handleLogOut() {
-		console.log('handleLogout')
+    console.log("handleLogout");
     try {
       logout().then(() => {
         dispatch(onLogout());
