@@ -3,11 +3,10 @@ import { RootState } from "..";
 import { logout } from "../firebase";
 import { onLogout } from "../userReducer";
 import { useNavigate } from "react-router-dom";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const userEmail = useAppSelector((state) => state.user.email);
+  const userEmail = useSelector<RootState>((state) => state.user.email);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,7 +15,6 @@ const Dashboard = () => {
   }, []);
 
   async function handleLogOut() {
-    console.log("handleLogout");
     try {
       logout().then(() => {
         dispatch(onLogout());

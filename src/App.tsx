@@ -24,7 +24,7 @@ function App() {
     <div id="main">
       <Routes>
         {currentUser === null ? (
-          <Route path="/" element={<Login currentUser={currentUser} />} />
+          <Route path="/" element={<Login />} />
         ) : (
           <Route
             path="/dashboard"
