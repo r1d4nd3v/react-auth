@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import styled from "styled-components";
 
 function Login() {
   const [loading, setLoading] = useState(false);
@@ -53,17 +54,17 @@ function Login() {
   return (
     <Card>
       <CardContent>
-        <div id="card-title">
-          <Typography>Sign In</Typography>
+        <Header>
+          <CustomText>Sign In</CustomText>
           <Divider light />
-        </div>
-        <TextField
+        </Header>
+        <CustomInput
           id="input-email"
           label="Email"
           type="text"
           variant="standard"
         />
-        <TextField
+        <CustomInput
           id="input-password"
           label="Password"
           type="password"
@@ -71,10 +72,14 @@ function Login() {
           variant="standard"
         />
       </CardContent>
-      <CardActions id="buttons">
-        <Button size="small">Sign Up</Button>
-        <Button size="small">Login</Button>
-      </CardActions>
+      <ButtonsContainer id="buttons">
+        <CustomButton variant="contained" size="small">
+          Sign Up
+        </CustomButton>
+        <CustomButton className="right-button" variant="contained" size="small">
+          Login
+        </CustomButton>
+      </ButtonsContainer>
     </Card>
     // <div id="main">
     //   <div id="fields">
@@ -99,5 +104,36 @@ function Login() {
     // </div>
   );
 }
+
+const Header = styled.div`
+  margin: 20px;
+`;
+
+const CustomText = styled(Typography)`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+const CustomInput = styled(TextField)`
+  display: grid;
+  margin: 10px 20px;
+`;
+
+const ButtonsContainer = styled(Button)`
+  margin: 0px 20px;
+
+  .right-button {
+    margin-left: 10px;
+  }
+`;
+
+const CustomButton = styled(Button)`
+  background: orange;
+  text-transform: none;
+	&:hover {
+		background-color: orange;
+		opacity: 0.5;
+	}
+`;
 
 export default Login;

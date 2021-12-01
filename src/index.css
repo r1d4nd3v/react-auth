@@ -5,32 +5,12 @@ body,
   height: 100%;
 }
 
-#buttons {
-  margin: 0px 20px;
+html {
+  background-color: floralwhite;
 }
 
 #main {
   width: 500px;
   height: 300px;
   margin: 20% auto;
-}
-.MuiCardContent-root {
-  display: grid;
-}
-
-#fields {
-  display: table-caption;
-  margin: 20px 0px;
-}
-
-#logout {
-  margin: 20px 0px;
-}
-
-#login {
-  margin-left: 5px;
-}
-
-#password {
-  margin-top: 5px;
 }
