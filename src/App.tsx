@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Dashboard from "./components/Dashboard";
-import Login from "./components/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Login from "./components/Login/Login";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { onSaveUser } from "./userReducer";

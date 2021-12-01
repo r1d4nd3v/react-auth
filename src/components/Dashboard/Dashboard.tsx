@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { RootState } from "..";
-import { logout } from "../firebase";
-import { onLogout } from "../userReducer";
+import { RootState } from "../..";
+import { logout } from "../../firebase";
+import { onLogout } from "../../userReducer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
