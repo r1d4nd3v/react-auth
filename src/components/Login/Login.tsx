@@ -66,14 +66,12 @@ function Login() {
           <Divider light />
         </Header>
         <CustomInput
-          id="input-email"
           label="Email"
           type="text"
           variant="standard"
           onChange={handleEmailChange}
         />
         <CustomInput
-          id="input-password"
           label="Password"
           type="password"
           autoComplete="current-password"
@@ -81,7 +79,7 @@ function Login() {
           onChange={handlePasswordChange}
         />
       </CardContent>
-      <ButtonsContainer id="buttons">
+      <ButtonsContainer>
         <CustomButton
           variant="contained"
           size="small"
