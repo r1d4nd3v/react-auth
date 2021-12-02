@@ -1,16 +1,10 @@
 html,
 body,
 #root,
-#main > div {
+#main {
   height: 100%;
 }
 
 html {
   background-color: floralwhite;
-}
-
-#main {
-  width: 500px;
-  height: 300px;
-  margin: 20% auto;
 }

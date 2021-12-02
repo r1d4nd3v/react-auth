@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onSaveUser } from "../../userReducer";
 import { RootState } from "../..";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
 import {
@@ -13,6 +12,7 @@ import {
   CustomButton,
   CustomText,
   CustomInput,
+	CustomCard
 } from "./LoginStyle";
 
 function Login() {
@@ -59,7 +59,7 @@ function Login() {
   };
 
   return (
-    <Card>
+    <CustomCard>
       <CardContent>
         <Header>
           <CustomText>Sign In</CustomText>
@@ -98,7 +98,7 @@ function Login() {
           Login
         </CustomButton>
       </ButtonsContainer>
-    </Card>
+    </CustomCard>
   );
 }
 
