@@ -1,15 +1,16 @@
-import AppBar from "@mui/material/AppBar";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import { CardHeader } from "@mui/material";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
 
-export const CustomAppBar = styled(AppBar)`
-  background: transparent;
-  color: black;
-  box-shadow: none;
+export const CustomBox = styled(Box)`
+  header {
+    background: transparent;
+    color: black;
+    box-shadow: none;
+  }
 `;
 
 export const CustomToolbar = styled(Toolbar)`
@@ -25,7 +26,7 @@ export const CustomCard = styled(Card)`
 `;
 
 export const CustomCardHeader = styled(CardHeader)`
-  background: #FBDC8F;
+  background: #fbdc8f;
   height: 40px;
   span {
     font-size: 16px;
@@ -33,11 +34,11 @@ export const CustomCardHeader = styled(CardHeader)`
   }
 `;
 
-export const CustomStack = styled(Stack)`
+export const ButtonsContainer = styled.div`
   display: block;
   position: absolute;
   top: 15%;
-	margin-left: 15px;
+  margin-left: 15px;
   .settings-button {
     margin: 0px;
     display: flex;
@@ -45,9 +46,11 @@ export const CustomStack = styled(Stack)`
 `;
 
 export const CustomButton = styled(Button)`
+  &&&&&&& {
+    color: darkgrey;
+    text-transform: none;
+  }
   background: transparent;
-  color: darkgrey;
   box-shadow: none;
-  text-transform: none;
   border: none;
 `;

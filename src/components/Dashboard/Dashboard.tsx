@@ -4,7 +4,6 @@ import { logout } from "../../firebase";
 import { onLogout } from "../../userReducer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
@@ -12,13 +11,15 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import AppBar from "@mui/material/AppBar";
+import Stack from "@mui/material/Stack";
 import {
-  CustomAppBar,
   CustomCard,
   CustomCardHeader,
-  CustomStack,
   CustomButton,
   CustomToolbar,
+	CustomBox,
+	ButtonsContainer
 } from "./DashboardStyle";
 
 const Dashboard = () => {
@@ -51,9 +52,8 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <Box>
-        <CustomAppBar>
+      <CustomBox>
+        <AppBar>
           <CustomToolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               dashboard
@@ -78,23 +78,24 @@ const Dashboard = () => {
             >
               <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
             </Menu>
-            {/* <Button color="inherit" onClick={handleLogOut}>
-              Log Out
-            </Button> */}
           </CustomToolbar>
-        </CustomAppBar>
-      </Box>
-      <CustomCard>
-        <CustomCardHeader title="Secret Dashboard"></CustomCardHeader>
-        <CardContent>Dashboard secrets</CardContent>
-      </CustomCard>
-      <CustomStack>
-        <CustomButton startIcon={<DashboardIcon />}>Dashboard</CustomButton>
-        <CustomButton className="settings-button" startIcon={<SettingsIcon />}>
-          Settings
-        </CustomButton>
-      </CustomStack>
-    </>
+        </AppBar>
+        <CustomCard>
+          <CustomCardHeader title="Secret Dashboard"></CustomCardHeader>
+          <CardContent>Dashboard secrets</CardContent>
+        </CustomCard>
+        <Stack>
+					<ButtonsContainer>
+          <CustomButton startIcon={<DashboardIcon />}>Dashboard</CustomButton>
+          <CustomButton
+            className="settings-button"
+            startIcon={<SettingsIcon />}
+          >
+            Settings
+          </CustomButton>
+					</ButtonsContainer>
+        </Stack>
+      </CustomBox>
   );
 };
 
