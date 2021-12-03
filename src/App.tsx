@@ -7,7 +7,7 @@ import Spinner from "./components/Spinner";
 
 const PrivateRoute = ({ auth, page }) => {
   if (auth === undefined) {
-    return <Spinner/>
+    return <Spinner />;
   }
   return auth ? <Layout page={page} /> : <Navigate to="/login" />;
 };
