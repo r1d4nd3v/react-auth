@@ -20,7 +20,6 @@ const CustomCardContent = styled(CardContent)`
 `;
 
 const LayoutCard = ({ title, content }) => {
-  console.log("content", content);
   return (
     <CustomCard>
       <CustomCardHeader title={title}></CustomCardHeader>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { signup, login } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { onSaveUser, onSaveQuote } from "../../userReducer";
 import { RootState } from "../..";
@@ -15,13 +15,14 @@ import {
   CustomCard,
 } from "./LoginStyle";
 
-function Login() {
+function Login({ auth }) {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector<RootState>((state) => state.user.email);
+  const currentUser = auth;
+  // const currentUser = useSelector<RootState>((state) => state.user.email);
 
   useEffect(() => {
     console.log("login", currentUser);
@@ -44,7 +45,6 @@ function Login() {
         fetch("http://quotes.stormconsultancy.co.uk/random.json")
           .then((response) => response.json())
           .then((res) => {
-            console.log("res", res);
             dispatch(onSaveQuote(res));
             dispatch(onSaveUser(data?.user));
             navigate("/dashboard");
@@ -64,7 +64,12 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  return (
+  if (currentUser === undefined) {
+    return <div>loading</div>;
+  }
+  return currentUser ? (
+    <Navigate to="/dashboard" />
+  ) : (
     <CustomCard>
       <CardContent>
         <Header>
