@@ -5,6 +5,14 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import MenuItem from "@mui/material/MenuItem";
+import { SxProps } from "@mui/system";
+
+export const CustomMenuItem = styled(MenuItem)`
+  &&&&&&& {
+    font-size: 14px;
+  }
+`;
 
 export const CustomBox = styled(Box)`
   header {
@@ -28,7 +36,7 @@ export const UserButton = styled(Button)`
     text-transform: none;
     color: black;
     padding-bottom: 0px;
-		font-size: 12px;
+    font-size: 12px;
   }
 `;
 
@@ -85,3 +93,36 @@ export const CustomButton = styled(Button)`
   box-shadow: none;
   border: none;
 `;
+
+export const paperProps = {
+  elevation: 0,
+  sx: {
+    overflow: "visible",
+    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+    mt: 1.5,
+    "& .MuiAvatar-root": {
+      width: 32,
+      height: 32,
+      ml: -0.5,
+      mr: 1,
+    },
+    "&:before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      zIndex: 0,
+    },
+  },
+};
+
+export const boxStyles: SxProps = {
+  marginTop: "5px",
+  display: "flex",
+  alignItems: "center",
+  textAlign: "center",
+};

@@ -4,14 +4,19 @@ import { logout } from "../../firebase";
 import { onLogout } from "../../userReducer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import AppBar from "@mui/material/AppBar";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 import {
   CustomCard,
   CustomCardHeader,
@@ -19,14 +24,14 @@ import {
   CustomToolbar,
   CustomBox,
   ButtonsContainer,
-	SubText,
-	UserButton,
-	UserInfoContainer,
-	HeaderTitle
+  HeaderTitle,
+  CustomMenuItem,
+  paperProps,
+	boxStyles
 } from "./DashboardStyle";
 
 const Dashboard = () => {
-  const userEmail = useSelector<RootState>((state) => state.user.email);
+  const userEmail = useSelector((state: RootState) => state.user.email);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -61,28 +66,40 @@ const Dashboard = () => {
           <HeaderTitle variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
             dashboard
           </HeaderTitle>
-          <UserInfoContainer>
-            <UserButton
-              id="basic-button"
-              aria-controls="basic-menu"
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            >
-              {userEmail}
-            </UserButton>
-            <SubText>Admin</SubText>
-          </UserInfoContainer>
+          <Box sx={boxStyles}>
+            <Tooltip title="Account settings">
+              <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {userEmail?.substring(0, 1).toUpperCase()}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+          </Box>
           <Menu
-            id="basic-menu"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
+            onClick={handleClose}
+            PaperProps={paperProps}
           >
-            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+            <CustomMenuItem>
+              <ListItemIcon>
+                <DashboardIcon fontSize="small" />
+              </ListItemIcon>
+              Dashboard
+            </CustomMenuItem>
+            <CustomMenuItem>
+              <ListItemIcon>
+                <Settings fontSize="small" />
+              </ListItemIcon>
+              Settings
+            </CustomMenuItem>
+            <CustomMenuItem onClick={handleLogOut}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </CustomMenuItem>
           </Menu>
         </CustomToolbar>
       </AppBar>
