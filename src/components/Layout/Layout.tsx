@@ -4,7 +4,6 @@ import { logout } from "../../firebase";
 import { onLogout } from "../../userReducer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import CardContent from "@mui/material/CardContent";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Menu from "@mui/material/Menu";
@@ -17,10 +16,8 @@ import IconButton from "@mui/material/IconButton";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
-
+import LayoutCard from "./LayoutCard";
 import {
-  CustomCard,
-  CustomCardHeader,
   CustomButton,
   CustomToolbar,
   CustomBox,
@@ -30,9 +27,9 @@ import {
   paperProps,
   boxStyles,
   CustomUserInfo,
-} from "./DashboardStyle";
+} from "./LayoutStyle";
 
-const Dashboard = () => {
+const Layout = ({ page }) => {
   const userEmail = useSelector((state: RootState) => state.user.email);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,12 +58,20 @@ const Dashboard = () => {
     }
   }
 
+  const onClickSettings = () => {
+    navigate("/settings");
+  };
+
+  const onClickDashboard = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <CustomBox>
       <AppBar>
         <CustomToolbar>
           <HeaderTitle variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
-            dashboard
+            {page}
           </HeaderTitle>
           <Box sx={boxStyles}>
             <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
@@ -86,16 +91,16 @@ const Dashboard = () => {
               <Avatar sx={{ width: 32, height: 32 }}>
                 {userEmail?.substring(0, 1).toUpperCase()}
               </Avatar>
-							{userEmail}
+              {userEmail}
             </CustomUserInfo>
             <Divider />
-            <CustomMenuItem>
+            <CustomMenuItem onClick={onClickDashboard}>
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
               </ListItemIcon>
               Dashboard
             </CustomMenuItem>
-            <CustomMenuItem>
+            <CustomMenuItem onClick={onClickSettings}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
@@ -110,15 +115,21 @@ const Dashboard = () => {
           </Menu>
         </CustomToolbar>
       </AppBar>
-      <CustomCard>
-        <CustomCardHeader title="Secret Dashboard"></CustomCardHeader>
-        <CardContent>Dashboard secrets</CardContent>
-      </CustomCard>
+      <LayoutCard
+        title="Secret Dashboard"
+        content="Dashboard secrets!"
+      ></LayoutCard>
       <Stack>
         <ButtonsContainer>
-          <CustomButton startIcon={<DashboardIcon />}>Dashboard</CustomButton>
+          <CustomButton
+            onClick={onClickDashboard}
+            startIcon={<DashboardIcon />}
+          >
+            Dashboard
+          </CustomButton>
           <CustomButton
             className="settings-button"
+            onClick={onClickSettings}
             startIcon={<SettingsIcon />}
           >
             Settings
@@ -129,4 +140,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Layout;
