@@ -4,6 +4,7 @@ import { CardHeader } from "@mui/material";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 export const CustomBox = styled(Box)`
   header {
@@ -17,9 +18,39 @@ export const CustomToolbar = styled(Toolbar)`
   padding: 0px 30px;
 `;
 
+export const UserInfoContainer = styled.div`
+  margin-top: 14px;
+`;
+
+export const UserButton = styled(Button)`
+  &&&&&&&&& {
+    font-weight: bold;
+    text-transform: none;
+    color: black;
+    padding-bottom: 0px;
+		font-size: 12px;
+  }
+`;
+
+export const HeaderTitle = styled(Typography)`
+  &&&&&&&& {
+    color: black;
+    font-weight: bold;
+  }
+`;
+
+export const SubText = styled(Typography)`
+  &&&&&&&& {
+    font-size: 12px;
+    color: darkgrey;
+  }
+  padding: 0px 8px;
+  text-align: right;
+`;
+
 export const CustomCard = styled(Card)`
   position: absolute;
-  top: 10%;
+  top: 9%;
   width: 80%;
   height: 100%;
   right: 0;
@@ -37,7 +68,7 @@ export const CustomCardHeader = styled(CardHeader)`
 export const ButtonsContainer = styled.div`
   display: block;
   position: absolute;
-  top: 15%;
+  top: 12%;
   margin-left: 15px;
   .settings-button {
     margin: 0px;

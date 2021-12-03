@@ -5,7 +5,6 @@ import { onLogout } from "../../userReducer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -18,8 +17,12 @@ import {
   CustomCardHeader,
   CustomButton,
   CustomToolbar,
-	CustomBox,
-	ButtonsContainer
+  CustomBox,
+  ButtonsContainer,
+	SubText,
+	UserButton,
+	UserInfoContainer,
+	HeaderTitle
 } from "./DashboardStyle";
 
 const Dashboard = () => {
@@ -52,40 +55,43 @@ const Dashboard = () => {
   }
 
   return (
-      <CustomBox>
-        <AppBar>
-          <CustomToolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              dashboard
-            </Typography>
-            <Button
+    <CustomBox>
+      <AppBar>
+        <CustomToolbar>
+          <HeaderTitle variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
+            dashboard
+          </HeaderTitle>
+          <UserInfoContainer>
+            <UserButton
               id="basic-button"
               aria-controls="basic-menu"
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             >
-              Dashboard
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-            </Menu>
-          </CustomToolbar>
-        </AppBar>
-        <CustomCard>
-          <CustomCardHeader title="Secret Dashboard"></CustomCardHeader>
-          <CardContent>Dashboard secrets</CardContent>
-        </CustomCard>
-        <Stack>
-					<ButtonsContainer>
+              {userEmail}
+            </UserButton>
+            <SubText>Admin</SubText>
+          </UserInfoContainer>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+          </Menu>
+        </CustomToolbar>
+      </AppBar>
+      <CustomCard>
+        <CustomCardHeader title="Secret Dashboard"></CustomCardHeader>
+        <CardContent>Dashboard secrets</CardContent>
+      </CustomCard>
+      <Stack>
+        <ButtonsContainer>
           <CustomButton startIcon={<DashboardIcon />}>Dashboard</CustomButton>
           <CustomButton
             className="settings-button"
@@ -93,9 +99,9 @@ const Dashboard = () => {
           >
             Settings
           </CustomButton>
-					</ButtonsContainer>
-        </Stack>
-      </CustomBox>
+        </ButtonsContainer>
+      </Stack>
+    </CustomBox>
   );
 };
 
