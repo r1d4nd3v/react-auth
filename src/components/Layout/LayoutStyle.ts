@@ -31,11 +31,11 @@ export const UserInfoContainer = styled.div`
 `;
 
 export const CustomUserInfo = styled(MenuItem)`
-&&&&&&&&&& {
-	pointer: default;
-	pointer-events: none;
-	font-size: 14px;
-}
+  &&&&&&&&&& {
+    pointer: default;
+    pointer-events: none;
+    font-size: 14px;
+  }
 `;
 
 export const UserButton = styled(Button)`
@@ -65,6 +65,9 @@ export const SubText = styled(Typography)`
 `;
 
 export const CustomCard = styled(Card)`
+  @media (max-width: 680px) {
+    width: 100%;
+  }
   position: absolute;
   top: 9%;
   width: 80%;
@@ -82,6 +85,9 @@ export const CustomCardHeader = styled(CardHeader)`
 `;
 
 export const ButtonsContainer = styled.div`
+  @media (max-width: 680px) {
+    display: none;
+  }
   display: block;
   position: absolute;
   top: 12%;
