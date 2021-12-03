@@ -17,6 +17,7 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
 import LayoutCard from "./LayoutCard";
+import { IQuote } from "../../userReducer";
 import {
   CustomButton,
   CustomToolbar,
@@ -31,7 +32,7 @@ import {
 
 const Layout = ({ page }) => {
   const userEmail = useSelector((state: RootState) => state.user.email);
-  const image = useSelector((state: RootState) => state.user.image);
+  const quote: IQuote = useSelector((state: RootState) => state.user.quote);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +40,7 @@ const Layout = ({ page }) => {
 
   useEffect(() => {
     console.log("dashboard-user", userEmail);
-    console.log("dashboard-image", image);
+    console.log("dashboard-quote", quote);
   }, []);
 
   const handleClick = (event) => {
@@ -118,7 +119,7 @@ const Layout = ({ page }) => {
           </Menu>
         </CustomToolbar>
       </AppBar>
-      <LayoutCard title="Secret Dashboard" content={image}></LayoutCard>
+      <LayoutCard title="Secret Dashboard" content={quote}></LayoutCard>
       <Stack>
         <ButtonsContainer>
           <CustomButton

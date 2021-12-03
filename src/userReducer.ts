@@ -2,11 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface IInitialState {
   email: string | null;
-  image: string | null;
+  quote: IQuote;
 }
+
+export interface IQuote {
+  author: string | null;
+  quote: string | null;
+}
+
 const initialState: IInitialState = {
   email: null,
-  image: null,
+  quote: null,
 };
 
 export const userSlice = createSlice({
@@ -16,8 +22,9 @@ export const userSlice = createSlice({
     onSaveUser: (state, action) => {
       state.email = action?.payload?.email;
     },
-    onSaveImage: (state, action) => {
-      state.image = action?.payload?.url;
+    onSaveQuote: (state, action) => {
+      const { author, quote } = action?.payload;
+      state.quote = { author, quote };
     },
     onLogout: (state) => {
       state.email = null;
@@ -26,6 +33,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { onSaveUser, onLogout, onSaveImage } = userSlice.actions;
+export const { onSaveUser, onLogout, onSaveQuote } = userSlice.actions;
 
 export default userSlice.reducer;

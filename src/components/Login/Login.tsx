@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { signup, login } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { onSaveUser, onSaveImage } from "../../userReducer";
+import { onSaveUser, onSaveQuote } from "../../userReducer";
 import { RootState } from "../..";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
@@ -41,11 +41,11 @@ function Login() {
     setLoading(true);
     try {
       await login(email, password).then((data) => {
-        fetch("https://api.thecatapi.com/v1/images/search")
+        fetch("http://quotes.stormconsultancy.co.uk/random.json")
           .then((response) => response.json())
           .then((res) => {
-            // console.log("res", res[0]?.url);
-            dispatch(onSaveImage(res[0]));
+            console.log("res", res);
+            dispatch(onSaveQuote(res));
             dispatch(onSaveUser(data?.user));
             navigate("/dashboard");
           });
