@@ -31,18 +31,21 @@ import {
 
 const Layout = ({ page }) => {
   const userEmail = useSelector((state: RootState) => state.user.email);
+  const image = useSelector((state: RootState) => state.user.image);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    console.log("dashboard", userEmail);
+    console.log("dashboard-user", userEmail);
+    console.log("dashboard-image", image);
   }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -115,10 +118,7 @@ const Layout = ({ page }) => {
           </Menu>
         </CustomToolbar>
       </AppBar>
-      <LayoutCard
-        title="Secret Dashboard"
-        content="Dashboard secrets!"
-      ></LayoutCard>
+      <LayoutCard title="Secret Dashboard" content={image}></LayoutCard>
       <Stack>
         <ButtonsContainer>
           <CustomButton

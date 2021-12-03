@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { signup, login } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { onSaveUser } from "../../userReducer";
+import { onSaveUser, onSaveImage } from "../../userReducer";
 import { RootState } from "../..";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
@@ -12,7 +12,7 @@ import {
   CustomButton,
   CustomText,
   CustomInput,
-	CustomCard
+  CustomCard,
 } from "./LoginStyle";
 
 function Login() {
@@ -41,8 +41,14 @@ function Login() {
     setLoading(true);
     try {
       await login(email, password).then((data) => {
-        dispatch(onSaveUser(data?.user?.email));
-        navigate("/dashboard");
+        fetch("https://api.thecatapi.com/v1/images/search")
+          .then((response) => response.json())
+          .then((res) => {
+            // console.log("res", res[0]?.url);
+            dispatch(onSaveImage(res[0]));
+            dispatch(onSaveUser(data?.user));
+            navigate("/dashboard");
+          });
       });
     } catch (error) {
       alert(error);
