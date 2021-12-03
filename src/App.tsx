@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "./components/Layout/Layout";
 import Login from "./components/Login/Login";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { onSaveUser } from "./userReducer";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./firebase";
 
 const PrivateRoute = ({ auth, page }) => {
@@ -15,20 +13,11 @@ const PrivateRoute = ({ auth, page }) => {
 };
 
 function App() {
-  const dispatch = useDispatch();
   const currentUser = useAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("currentUser", currentUser);
-    // currentUser ? navigate("dashboard") : navigate("/");
-    // dispatch(onSaveUser(currentUser));
-  }, [currentUser]);
 
   return (
     <div id="main">
       <Routes>
-        {/* {currentUser === null && <Route path="/" element={<Login />} />} */}
         <Route
           path="/"
           element={<PrivateRoute page="dashboard" auth={currentUser} />}

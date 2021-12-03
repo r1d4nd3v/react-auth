@@ -2,11 +2,13 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { onSaveUser } from "./userReducer";
+import { useDispatch } from "react-redux";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -36,10 +38,12 @@ export const logout = () => {
 
 export const useAuth = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
+	const dispatch = useDispatch();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      dispatch(onSaveUser(user));
     });
   }, []);
   return currentUser;

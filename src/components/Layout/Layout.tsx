@@ -18,6 +18,7 @@ import Logout from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
 import LayoutCard from "./LayoutCard";
 import { IQuote } from "../../userReducer";
+import { onSaveQuote } from "../../userReducer";
 import {
   CustomButton,
   CustomToolbar,
@@ -41,6 +42,11 @@ const Layout = ({ page }) => {
   useEffect(() => {
     console.log("dashboard-user", userEmail);
     console.log("dashboard-quote", quote);
+    fetch("http://quotes.stormconsultancy.co.uk/random.json")
+      .then((response) => response.json())
+      .then((res) => {
+        dispatch(onSaveQuote(res));
+      });
   }, []);
 
   const handleClick = (event) => {

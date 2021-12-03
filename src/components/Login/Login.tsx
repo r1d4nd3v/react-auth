@@ -42,13 +42,8 @@ function Login({ auth }) {
     setLoading(true);
     try {
       await login(email, password).then((data) => {
-        fetch("http://quotes.stormconsultancy.co.uk/random.json")
-          .then((response) => response.json())
-          .then((res) => {
-            dispatch(onSaveQuote(res));
-            dispatch(onSaveUser(data?.user));
-            navigate("/dashboard");
-          });
+        dispatch(onSaveUser(data?.user));
+        navigate("/dashboard");
       });
     } catch (error) {
       alert(error);
