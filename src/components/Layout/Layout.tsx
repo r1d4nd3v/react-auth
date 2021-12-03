@@ -16,7 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Divider from "@mui/material/Divider";
-import LayoutCard from "./LayoutCard";
+import LayoutCard from "./LayoutCard/LayoutCard";
 import { IQuote } from "../../userReducer";
 import { onSaveQuote } from "../../userReducer";
 import {
@@ -40,8 +40,6 @@ const Layout = ({ page }) => {
   const open = Boolean(anchorEl);
 
   useEffect(() => {
-    console.log("dashboard-user", userEmail);
-    console.log("dashboard-quote", quote);
     fetch("http://quotes.stormconsultancy.co.uk/random.json")
       .then((response) => response.json())
       .then((res) => {
@@ -125,7 +123,7 @@ const Layout = ({ page }) => {
           </Menu>
         </CustomToolbar>
       </AppBar>
-      <LayoutCard title="Secret Dashboard" content={quote}></LayoutCard>
+      <LayoutCard user={userEmail} page={page} content={quote}></LayoutCard>
       <Stack>
         <ButtonsContainer>
           <CustomButton

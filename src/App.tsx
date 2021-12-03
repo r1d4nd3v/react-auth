@@ -3,11 +3,11 @@ import Layout from "./components/Layout/Layout";
 import Login from "./components/Login/Login";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./firebase";
+import Spinner from "./components/Spinner";
 
 const PrivateRoute = ({ auth, page }) => {
-  console.log("privateRoute", auth);
   if (auth === undefined) {
-    return <div>loading</div>;
+    return <Spinner/>
   }
   return auth ? <Layout page={page} /> : <Navigate to="/login" />;
 };

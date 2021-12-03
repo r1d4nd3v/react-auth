@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { signup, login } from "../../firebase";
 import { useNavigate, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { onSaveUser, onSaveQuote } from "../../userReducer";
-import { RootState } from "../..";
+import { useDispatch } from "react-redux";
+import { onSaveUser } from "../../userReducer";
 import CardContent from "@mui/material/CardContent";
 import Divider from "@mui/material/Divider";
+import Spinner from "../Spinner";
 import {
   ButtonsContainer,
   Header,
@@ -22,11 +22,6 @@ function Login({ auth }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentUser = auth;
-  // const currentUser = useSelector<RootState>((state) => state.user.email);
-
-  useEffect(() => {
-    console.log("login", currentUser);
-  }, []);
 
   async function handleSignup() {
     setLoading(true);
@@ -60,7 +55,7 @@ function Login({ auth }) {
   };
 
   if (currentUser === undefined) {
-    return <div>loading</div>;
+    return <Spinner />;
   }
   return currentUser ? (
     <Navigate to="/dashboard" />
