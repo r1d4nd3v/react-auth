@@ -30,6 +30,14 @@ export const UserInfoContainer = styled.div`
   margin-top: 14px;
 `;
 
+export const CustomUserInfo = styled(MenuItem)`
+&&&&&&&&&& {
+	pointer: default;
+	pointer-events: none;
+	font-size: 14px;
+}
+`;
+
 export const UserButton = styled(Button)`
   &&&&&&&&& {
     font-weight: bold;

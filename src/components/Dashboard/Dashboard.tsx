@@ -14,9 +14,10 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import Divider from "@mui/material/Divider";
+
 import {
   CustomCard,
   CustomCardHeader,
@@ -27,7 +28,8 @@ import {
   HeaderTitle,
   CustomMenuItem,
   paperProps,
-	boxStyles
+  boxStyles,
+  CustomUserInfo,
 } from "./DashboardStyle";
 
 const Dashboard = () => {
@@ -67,13 +69,11 @@ const Dashboard = () => {
             dashboard
           </HeaderTitle>
           <Box sx={boxStyles}>
-            <Tooltip title="Account settings">
-              <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                <Avatar sx={{ width: 32, height: 32 }}>
-                  {userEmail?.substring(0, 1).toUpperCase()}
-                </Avatar>
-              </IconButton>
-            </Tooltip>
+            <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+              <Avatar sx={{ width: 32, height: 32 }}>
+                {userEmail?.substring(0, 1).toUpperCase()}
+              </Avatar>
+            </IconButton>
           </Box>
           <Menu
             anchorEl={anchorEl}
@@ -82,6 +82,13 @@ const Dashboard = () => {
             onClick={handleClose}
             PaperProps={paperProps}
           >
+            <CustomUserInfo>
+              <Avatar sx={{ width: 32, height: 32 }}>
+                {userEmail?.substring(0, 1).toUpperCase()}
+              </Avatar>
+							{userEmail}
+            </CustomUserInfo>
+            <Divider />
             <CustomMenuItem>
               <ListItemIcon>
                 <DashboardIcon fontSize="small" />
